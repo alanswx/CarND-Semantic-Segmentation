@@ -1,6 +1,7 @@
 import os.path
 import tensorflow as tf
 import helper
+import augment
 import warnings
 from distutils.version import LooseVersion
 import project_tests as tests
@@ -132,6 +133,7 @@ def run():
     num_epochs=12 #0.09
     #num_epochs=24
     batch_size=8
+    #batch_size=16
     tests.test_for_kitti_dataset(data_dir)
 
     # Download pretrained vgg model
@@ -145,7 +147,7 @@ def run():
         # Path to vgg model
         vgg_path = os.path.join(data_dir, 'vgg')
         # Create function to get batches
-        get_batches_fn = helper.gen_batch_function(os.path.join(data_dir, 'data_road/training'), image_shape)
+        get_batches_fn = augment.gen_aug_batch_function(os.path.join(data_dir, 'data_road/training'), image_shape)
 
         # OPTIONAL: Augment Images for better results
         #  https://datascience.stackexchange.com/questions/5224/how-to-prepare-augment-images-for-neural-network
