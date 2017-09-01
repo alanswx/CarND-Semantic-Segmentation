@@ -57,6 +57,7 @@ def gen_aug_batch_function(data_folder, image_shape):
             re.sub(r'_(lane|road)_', '_', os.path.basename(path)): path
             for path in glob(os.path.join(data_folder, 'gt_image_2', '*_road_*.png'))}
         background_color = np.array([255, 0, 0])
+        count = 0
 
         random.shuffle(image_paths)
         for batch_i in range(0, len(image_paths), batch_size):
@@ -67,8 +68,16 @@ def gen_aug_batch_function(data_folder, image_shape):
 
                 image = scipy.misc.imresize(scipy.misc.imread(image_file), image_shape)
                 gt_image = scipy.misc.imresize(scipy.misc.imread(gt_image_file), image_shape)
+
                 image,gt_image = augment_pipeline(image,gt_image)
 
+
+                count = count + 1
+                name="image_"+str(count)+".png"
+                gtname="gt_image_"+str(count)+".png"
+                #scipy.misc.imsave(os.path.join("to", name), image)
+                #scipy.misc.imsave(os.path.join("to", gtname), gt_image)
+             
                 gt_bg = np.all(gt_image == background_color, axis=2)
                 gt_bg = gt_bg.reshape(*gt_bg.shape, 1)
                 gt_image = np.concatenate((gt_bg, np.invert(gt_bg)), axis=2)

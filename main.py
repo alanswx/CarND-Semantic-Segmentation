@@ -167,6 +167,10 @@ def run():
 
         writer.close()
         # OPTIONAL: Apply the trained model to a video
+        saver = tf.train.Saver()
+        save_path = saver.save(sess, "model.ckpt")
+        print("Model saved in file: %s" % save_path)
+
 
 
 if __name__ == '__main__':
