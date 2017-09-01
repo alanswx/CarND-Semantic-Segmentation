@@ -1,4 +1,29 @@
 # Semantic Segmentation
+
+### Update for Second submission:
+
+  * Added weight initialization to each new layer:
+
+      ```
+      layer7_onexone=tf.layers.conv2d(vgg_layer7_out, num_classes, 1, strides=(1,1), 
+           kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+      ```
+
+  * retrained, and included new loss values
+  * updated with a new "run" and video output 
+
+
+The new model seems to work much better. It fixed the bad image I had in the last submission and the green "carpet" is filled in as a constant value instead of missing a lot of pixels.  The videos also perform much better, and the output are now included.  The videos are created in predict.py
+
+before:
+
+![bad example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/writeupimages/broken_uu_000097.png)
+
+after:
+
+![fixed example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/runs/1504290592.1697896/uu_000097.png)
+
+
 ### Introduction
 
 This project takes a pretrained VGG network, and converts it into a Fully Convolutional network. The last layer outputs a pixel array that contains the openspace.  It can be overlayed to make nice predictions.
@@ -37,6 +62,10 @@ Training Finished. Saving test images to: ./runs/1504225588.823267
 Model saved in file: model.ckpt
 ```
 
+### New Training: (with layers being initialized)
+
+not sure why the loss is jumping around.
+
 ```
  Epoch: 0 | loss: 0.3576163649559021
  Epoch: 1 | loss: 0.23299910128116608
@@ -59,11 +88,11 @@ It seems to perform reasonable well.
 
 here is an image in the result set that looks really good:
 
-![good example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/runs/1504225588.823267/um_000000.png)
+![good example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/runs/1504290592.1697896/um_000000.png)
 
 here is one that it didn't do so well on:
 
-![bad example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/runs/1504225588.823267/uu_000097.png)
+![bad example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/runs/1504290592.1697896/uu_000097.png)
 
 ### predict.py
 
