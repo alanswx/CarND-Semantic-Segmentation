@@ -37,6 +37,22 @@ Training Finished. Saving test images to: ./runs/1504225588.823267
 Model saved in file: model.ckpt
 ```
 
+```
+ Epoch: 0 | loss: 0.3576163649559021
+ Epoch: 1 | loss: 0.23299910128116608
+ Epoch: 2 | loss: 0.6348710656166077
+ Epoch: 3 | loss: 0.2156365066766739
+ Epoch: 4 | loss: 0.08985596150159836
+ Epoch: 5 | loss: 0.11673294007778168
+ Epoch: 6 | loss: 0.172101229429245
+ Epoch: 7 | loss: 0.15360024571418762
+ Epoch: 8 | loss: 0.055733900517225266
+ Epoch: 9 | loss: 0.28553634881973267
+ Epoch: 10 | loss: 0.17168495059013367
+ Epoch: 11 | loss: 0.12280642241239548
+Training Finished. Saving test images to: ./runs/1504290592.1697896
+```
+
 ### Results
 
 It seems to perform reasonable well.

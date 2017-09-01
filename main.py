@@ -55,20 +55,20 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
     #tf.layers.conv2d(x, num_outputs, 1, 1, weights_initializer=custom_init)
 
     # deconvolute from layer 7
-    layer7_onexone=tf.layers.conv2d(vgg_layer7_out, num_classes, 1, strides=(1,1))
-    layer7_upsample=tf.layers.conv2d_transpose(layer7_onexone,num_classes,4,strides=(2,2),padding='same')
+    layer7_onexone=tf.layers.conv2d(vgg_layer7_out, num_classes, 1, strides=(1,1),kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+    layer7_upsample=tf.layers.conv2d_transpose(layer7_onexone,num_classes,4,strides=(2,2),padding='same',kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
     # create skip layers from 4 to 7 (add it)
-    layer4_onexone=tf.layers.conv2d(vgg_layer4_out,num_classes,1,strides=(1,1)) 
+    layer4_onexone=tf.layers.conv2d(vgg_layer4_out,num_classes,1,strides=(1,1),kernel_initializer=tf.truncated_normal_initializer(stddev=0.01)) 
     layer4=tf.add(layer7_upsample,layer4_onexone)
     # transpose it up another 2x
-    layer4_upsample=tf.layers.conv2d_transpose(layer4,num_classes,4,strides=(2,2),padding='same')
+    layer4_upsample=tf.layers.conv2d_transpose(layer4,num_classes,4,strides=(2,2),padding='same',kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
     # create skip layers from 3 to current (add it)
-    layer3_onexone=tf.layers.conv2d(vgg_layer3_out,num_classes,1,strides=(1,1)) 
+    layer3_onexone=tf.layers.conv2d(vgg_layer3_out,num_classes,1,strides=(1,1),kernel_initializer=tf.truncated_normal_initializer(stddev=0.01)) 
     layer3=tf.add(layer4_upsample,layer3_onexone)
     # transpose it up again
-    output = tf.layers.conv2d_transpose(layer3,num_classes,16,strides=(8,8),padding='same',name='output')
+    output = tf.layers.conv2d_transpose(layer3,num_classes,16,strides=(8,8),padding='same',name='output',kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
     
 
     return output
