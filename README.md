@@ -92,7 +92,7 @@ here is an image in the result set that looks really good:
 
 here is one that it didn't do so well on:
 
-![bad example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/runs/1504290592.1697896/uu_000097.png)
+![bad example](https://github.com/alanswx/CarND-Semantic-Segmentation/blob/master/runs/1504290592.1697896/um_000093.png)
 
 ### predict.py
 
